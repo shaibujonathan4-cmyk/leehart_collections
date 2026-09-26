@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leehart Collections | Luxury Modest Wear & Accessories</title>
+  <style>
+    /* CSS RESET & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #854d0e;
+      --primary-hover: #713f12;
+      --primary-light: #fef3c7;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-600: #475569;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --slate-950: #020617;
+      --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--slate-50);
+      color: var(--slate-900);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ANNOUNCEMENT BAR */
+    .announcement-bar {
+      background-color: var(--primary);
+      color: #fef3c7;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b45309, #d97706);
+      color: white;
+      font-family: var(--font-serif);
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .logo-sub {
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--slate-600);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: bold;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background-color: white;
+      border: 1px solid var(--slate-200);
+      color: var(--slate-800);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--slate-100);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 60px 16px;
+      background: linear-gradient(180deg, rgba(254,243,199,0.3) 0%, rgba(255,255,255,1) 100%);
+    }
+
+    .hero-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .hero-container {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--primary);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      color: var(--slate-600);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      max-width: 540px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background-color: white;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--slate-200);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 450px;
+      border-radius: 12px;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* TRUST BADGES */
+    .trust-section {
+      background-color: white;
+      border-top: 1px solid var(--slate-200);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 30px 16px;
+    }
+
+    .trust-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item h4 {
+      font-size: 0.95rem;
+    }
+
+    .trust-item p {
+      font-size: 0.8rem;
+      color: var(--slate-600);
+    }
+
+    /* PRODUCTS & TABS */
+    .products-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 16px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-title h2 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: none;
+      background-color: transparent;
+      color: var(--slate-600);
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background-color: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background-color: var(--slate-100);
+      aspect-ratio: 4/5;
+    }
+
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .product-details {
+      padding: 16px;
+    }
+
+    .product-rating {
+      color: #d97706;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: var(--slate-600);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .product-footer {
+      padding: 0 16px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-price {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--slate-950);
+      color: #94a3b8;
+      padding: 60px 16px 20px;
+      font-size: 0.85rem;
+    }
+
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .footer-title {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <span>FLASH SALE: Enjoy 15% OFF your first order with code: <strong>LEEHART15</strong></span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-badge">LC</div>
+        <div>
+          <div class="logo-text">LEEHART</div>
+          <div class="logo-sub">COLLECTIONS</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#products">Collections</a>
+        <a href="#products">Best Sellers</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="cart-btn" onclick="addToCart()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <a href="#products" class="btn btn-primary">Shop Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <div class="hero-container">
+      <div>
+        <span class="hero-tag">Luxury Meets Everyday Elegance</span>
+        <h1 class="hero-title">Redefine Your Style With Premium <span>Leehart Wear</span></h1>
+        <p class="hero-desc">Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn btn-primary">Explore Collection</a>
+          <a href="#products" class="btn btn-outline">Browse Inventory</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <!-- REPLACE WITH YOUR HERO IMAGE -->
+        <img src="images/hero-abaya.jpg" alt="Luxury White Embellished Abaya" onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80'">
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BADGES -->
+  <section class="trust-section">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <h4>Swift Delivery</h4>
+        <p>Tracked orders straight to your doorstep</p>
+      </div>
+      <div class="trust-item">
+        <h4>Quality Assured</h4>
+        <p>Inspected fine fabrics & hardwares</p>
+      </div>
+      <div class="trust-item">
+        <h4>Easy Exchanges</h4>
+        <p>7-day hassle-free exchange window</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION WITH FILTER TABS -->
+  <section id="products" class="products-section">
+    <div class="section-header">
+      <div class="section-title">
+        <h2>Our Featured Collections</h2>
+        <p style="color: var(--slate-600); font-size: 0.9rem;">Handpicked luxury items ready for immediate order</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">All</button>
+        <button class="tab-btn" onclick="filterCategory('abayas', this)">Abayas</button>
+        <button class="tab-btn" onclick="filterCategory('luggage', this)">Luggage</button>
+        <button class="tab-btn" onclick="filterCategory('bags', this)">Bags</button>
+        <button class="tab-btn" onclick="filterCategory('footwear', this)">Footwear</button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- PRODUCTS INJECTED VIA JAVASCRIPT -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title" style="font-family: var(--font-serif); font-size: 1.2rem;">LEEHART COLLECTIONS</div>
+        <p>Your home for luxury modest wear, luggage sets, structured bags, and glam footwear.</p>
+      </div>
+      <div>
+        <div class="footer-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#products">Collections</a></li>
+          <li><a href="#products">New Arrivals</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Leehart Collections. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Product Data - Set image paths here
+    const products = [
+      {
+        id: 1,
+        name: "Luxury Embellished Heart Abaya (Pure White)",
+        category: "abayas",
+        price: "$135.00",
+        rating: "★ 5.0 (42)",
+        badge: "Best Seller",
+        desc: "Hand-embellished silk blend gown with delicate embroidery.",
+        image: "images/white-abaya.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 2,
+        name: "Royal Emerald Gold-Embroidered Abaya",
+        category: "abayas",
+        price: "$140.00",
+        rating: "★ 4.9 (38)",
+        badge: "Trending",
+        desc: "Velvet-touch gown featuring gold trim embroidery along cuffs.",
+        image: "images/emerald-abaya.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 3,
+        name: "6-Piece Champagne Gold Spinner Luggage Set",
+        category: "luggage",
+        price: "$290.00",
+        rating: "★ 5.0 (64)",
+        badge: "Must Have",
+        desc: "Hardshell suitcases with 360-degree silent dual spinner wheels.",
+        image: "images/luggage-set.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1565026057447-b88e3f29042b?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 4,
+        name: "Beauty Bella Textured Leather Handbag",
+        category: "bags",
+        price: "$85.00",
+        rating: "★ 4.8 (29)",
+        badge: "New",
+        desc: "Structured leather handbag featuring dual handles.",
+        image: "images/leather-bag.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 5,
+        name: "Crystal-Embellished H-Strap Slides",
+        category: "footwear",
+        price: "$45.00",
+        rating: "★ 4.9 (51)",
+        badge: "Hot",
+        desc: "Comfort-cushioned flat sandals accented with rhinestones.",
+        image: "images/h-strap-slides.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 6,
+        name: "Rhinestone Knot Low-Heel Mules",
+        category: "footwear",
+        price: "$52.00",
+        rating: "★ 5.0 (19)",
+        badge: "Limited",
+        desc: "Square-toe mules featuring crossover mesh rhinestone straps.",
+        image: "images/mules.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500&q=80"
+      }
+    ];
+
+    let cartCount = 0;
+
+    // Render Products
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = items.map(p => `
+        <div class="product-card">
+          <div>
+            <div class="product-image-wrap">
+              <span class="product-badge">${p.badge}</span>
+              <img src="${p.image}" alt="${p.name}" onerror="this.src='${p.fallbackImg}'">
+            </div>
+            <div class="product-details">
+              <div class="product-rating">${p.rating}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.desc}</div>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">${p.price}</div>
+            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addToCart()">Add To Cart</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter Logic
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (cat === 'all') {
+        renderProducts(products);
+      } else {
+        renderProducts(products.filter(p => p.category === cat));
+      }
+    }
+
+    // Cart Counter
+    function addToCart() {
+      cartCount++;
+      document.getElementById('cartBadge').innerText = cartCount;
+    }
+
+    // Initial Load
+    renderProducts(products);
+  </script>
+</body>
+</html>
