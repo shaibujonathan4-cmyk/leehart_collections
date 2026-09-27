@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leehart Collections | Admin</title>
+<style>
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #854d0e;
+    --primary-hover: #713f12;
+    --primary-light: #fef3c7;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-600: #475569;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --slate-950: #020617;
+    --danger: #b42318;
+    --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--slate-50);
+    color: var(--slate-900);
+    line-height: 1.5;
+  }
+
+  a { color: inherit; }
+
+  /* ---- Login screen ---- */
+  .login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .login-box {
+    background: white;
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    padding: 36px 30px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08);
+  }
+
+  .login-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .logo-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b45309, #d97706);
+    color: white;
+    font-family: var(--font-serif);
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .login-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: bold; line-height: 1; }
+  .login-sub { font-size: 0.55rem; letter-spacing: 0.25em; color: var(--primary); text-transform: uppercase; font-weight: 600; margin-top: 4px; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--slate-200);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-outline { background: white; border: 1px solid var(--slate-300); color: var(--slate-800); }
+  .btn-outline:hover { background: var(--slate-100); }
+  .btn-danger { background: #fee2e2; color: var(--danger); }
+  .btn-danger:hover { background: #fecaca; }
+  .btn-block { width: 100%; }
+
+  .login-error { color: var(--danger); font-size: 0.8rem; margin-bottom: 14px; display: none; }
+  .login-hint { margin-top: 16px; font-size: 0.75rem; color: var(--slate-600); }
+
+  /* ---- Admin shell ---- */
+  .admin-shell { display: none; min-height: 100vh; }
+  .admin-shell.open { display: flex; }
+
+  .sidebar {
+    width: 220px;
+    background: var(--slate-950);
+    color: #cbd5e1;
+    flex-shrink: 0;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    padding: 0 6px;
+  }
+
+  .sidebar-brand-text { font-family: var(--font-serif); font-size: 1rem; color: white; font-weight: bold; }
+  .sidebar-brand-sub { font-size: 0.55rem; letter-spacing: 0.2em; color: #d4a72c; text-transform: uppercase; }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    text-align: left;
+    width: 100%;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: white; }
+  .nav-item.active { background: var(--primary); color: white; }
+
+  .sidebar-footer { margin-top: auto; }
+
+  .main {
+    flex: 1;
+    padding: 32px 36px;
+    max-width: 1000px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+
+  .page-title { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 4px; }
+  .page-desc { color: var(--slate-600); font-size: 0.85rem; }
+
+  .panel {
+    background: white;
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .panel-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .panel-sub { color: var(--slate-600); font-size: 0.8rem; margin-bottom: 18px; }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 10px 8px; font-size: 0.85rem; border-bottom: 1px solid var(--slate-100); vertical-align: middle; }
+  th { color: var(--slate-600); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td img { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; }
+  .row-actions { display: flex; gap: 8px; }
+  .row-actions button { font-size: 0.75rem; padding: 6px 10px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 14px; margin-bottom: 24px; }
+  .stat-card { background: white; border: 1px solid var(--slate-200); border-radius: 12px; padding: 18px; }
+  .stat-num { font-family: var(--font-serif); font-size: 1.7rem; font-weight: bold; }
+  .stat-label { font-size: 0.78rem; color: var(--slate-600); }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--slate-950);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .badge-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 800px) {
+    .admin-shell.open { flex-direction: column; }
+    .sidebar { width: 100%; flex-direction: row; overflow-x: auto; }
+    .sidebar-brand, .sidebar-footer { display: none; }
+    .main { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="logo-badge">LC</div>
+        <div>
+          <div class="login-title">LEEHART</div>
+          <div class="login-sub">Admin Panel</div>
+        </div>
+      </div>
+      <p class="login-error" id="loginError">Incorrect password. Please try again.</p>
+      <div class="field">
+        <label for="adminPassword">Admin Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter') attemptLogin()">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="attemptLogin()">Log In</button>
+      <p class="login-hint">Demo preview only — the default password is <strong>leehart2026</strong>. In the finished build this will be swapped for a real, private login.</p>
+    </div>
+  </div>
+
+  <!-- ADMIN SHELL -->
+  <div class="admin-shell" id="adminShell">
+    <div class="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-badge">LC</div>
+        <div>
+          <div class="sidebar-brand-text">LEEHART</div>
+          <div class="sidebar-brand-sub">Admin</div>
+        </div>
+      </div>
+
+      <button class="nav-item active" onclick="showView('dashboard', this)">Dashboard</button>
+      <button class="nav-item" onclick="showView('products', this)">Products</button>
+      <button class="nav-item" onclick="showView('content', this)">Site Content</button>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="nav-item" style="text-decoration:none; display:flex;">View Live Site</a>
+        <button class="nav-item" onclick="logout()">Log Out</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <!-- DASHBOARD -->
+      <div class="view active" id="view-dashboard">
+        <div class="topbar">
+          <div>
+            <div class="page-title">Dashboard</div>
+            <div class="page-desc">A quick look at what customers currently see on your site.</div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num" id="statTotal">0</div>
+            <div class="stat-label">Total Products</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statAbayas">0</div>
+            <div class="stat-label">Abayas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statLuggage">0</div>
+            <div class="stat-label">Luggage</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statBags">0</div>
+            <div class="stat-label">Bags</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statFootwear">0</div>
+            <div class="stat-label">Footwear</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">How this demo works</div>
+          <div class="panel-sub">A short explainer for reviewing this preview.</div>
+          <p style="font-size:0.85rem; color:var(--slate-600); line-height:1.7;">
+            Anything you add, edit or remove under <strong>Products</strong> or <strong>Site Content</strong> updates the live customer site immediately, in this browser. Customers browse products, open a product for details, and send an enquiry that opens pre-filled on WhatsApp — there's no payment step, since Leehart Collections currently takes orders by chat. In the final delivered version, this data is saved centrally instead of per-browser, so your changes show up for every visitor from any device.
+          </p>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="view" id="view-products">
+        <div class="topbar">
+          <div>
+            <div class="page-title">Products</div>
+            <div class="page-desc">Add, edit or remove items customers see in the shop.</div>
+          </div>
+          <button class="btn btn-primary" onclick="openProductForm()">+ Add Product</button>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Tag</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SITE CONTENT -->
+      <div class="view" id="view-content">
+        <div class="topbar">
+          <div>
+            <div class="page-title">Site Content</div>
+            <div class="page-desc">Edit the announcement bar and homepage hero.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Announcement Bar</div>
+          <div class="panel-sub">The banner shown at the very top of the site.</div>
+          <div class="field">
+            <label for="cAnnouncement">Announcement text (HTML allowed, e.g. &lt;strong&gt; for bold)</label>
+            <textarea id="cAnnouncement"></textarea>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Homepage Hero</div>
+          <div class="panel-sub">The main banner customers see first.</div>
+          <div class="field">
+            <label for="cHeroTitle">Hero title (HTML allowed, e.g. &lt;span&gt; for the accent colour)</label>
+            <input type="text" id="cHeroTitle">
+          </div>
+          <div class="field">
+            <label for="cHeroDesc">Hero description</label>
+            <textarea id="cHeroDesc"></textarea>
+          </div>
+          <div class="field">
+            <label for="cHeroImage">Hero image path or URL</label>
+            <input type="text" id="cHeroImage">
+          </div>
+          <button class="btn btn-primary" onclick="saveContent()">Save Content Changes</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRODUCT FORM MODAL (built with plain fixed-position div, no separate CSS class needed) -->
+  <div id="productFormOverlay" style="display:none; position:fixed; inset:0; background:rgba(2,6,23,0.55); z-index:150; align-items:flex-start; justify-content:center; overflow-y:auto; padding:40px 16px;">
+    <div style="background:white; border-radius:14px; max-width:520px; width:100%; padding:26px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <div class="panel-title" id="productFormTitle">Add Product</div>
+        <button class="btn btn-outline" style="padding:4px 10px;" onclick="closeProductForm()">✕</button>
+      </div>
+
+      <input type="hidden" id="pfId">
+      <div class="grid-2">
+        <div class="field">
+          <label for="pfName">Product name</label>
+          <input type="text" id="pfName" placeholder="e.g. Royal Emerald Abaya">
+        </div>
+        <div class="field">
+          <label for="pfCategory">Category</label>
+          <select id="pfCategory">
+            <option value="abayas">Abayas</option>
+            <option value="luggage">Luggage</option>
+            <option value="bags">Bags</option>
+            <option value="footwear">Footwear</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="pfPrice">Price (e.g. $135.00)</label>
+          <input type="text" id="pfPrice">
+        </div>
+        <div class="field">
+          <label for="pfBadge">Tag (e.g. New, Best Seller — optional)</label>
+          <input type="text" id="pfBadge">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="pfRating">Rating text (e.g. ★ 5.0 (12))</label>
+          <input type="text" id="pfRating">
+        </div>
+        <div class="field">
+          <label for="pfImage">Image path or URL</label>
+          <input type="text" id="pfImage" placeholder="images/example.jpg">
+        </div>
+      </div>
+      <div class="field">
+        <label for="pfDesc">Description</label>
+        <textarea id="pfDesc"></textarea>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:6px;">
+        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+        <button class="btn btn-outline" onclick="closeProductForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  const ADMIN_PASSWORD = "leehart2026"; // Demo-only password. Replace with real auth in the final build.
+
+  const defaultProducts = [
+    { id: 1, name: "Luxury Embellished Heart Abaya (Pure White)", category: "abayas", price: "$135.00", rating: "★ 5.0 (42)", badge: "Best Seller", desc: "Hand-embellished silk blend gown with delicate embroidery.", image: "images/white-abaya.jpg", fallbackImg: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80" },
+    { id: 2, name: "Royal Emerald Gold-Embroidered Abaya", category: "abayas", price: "$140.00", rating: "★ 4.9 (38)", badge: "Trending", desc: "Velvet-touch gown featuring gold trim embroidery along cuffs.", image: "images/emerald-abaya.jpg", fallbackImg: "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?auto=format&fit=crop&w=500&q=80" },
+    { id: 3, name: "6-Piece Champagne Gold Spinner Luggage Set", category: "luggage", price: "$290.00", rating: "★ 5.0 (64)", badge: "Must Have", desc: "Hardshell suitcases with 360-degree silent dual spinner wheels.", image: "images/luggage-set.jpg", fallbackImg: "https://images.unsplash.com/photo-1565026057447-b88e3f29042b?auto=format&fit=crop&w=500&q=80" },
+    { id: 4, name: "Beauty Bella Textured Leather Handbag", category: "bags", price: "$85.00", rating: "★ 4.8 (29)", badge: "New", desc: "Structured leather handbag featuring dual handles.", image: "images/leather-bag.jpg", fallbackImg: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80" },
+    { id: 5, name: "Crystal-Embellished H-Strap Slides", category: "footwear", price: "$45.00", rating: "★ 4.9 (51)", badge: "Hot", desc: "Comfort-cushioned flat sandals accented with rhinestones.", image: "images/h-strap-slides.jpg", fallbackImg: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=500&q=80" },
+    { id: 6, name: "Rhinestone Knot Low-Heel Mules", category: "footwear", price: "$52.00", rating: "★ 5.0 (19)", badge: "Limited", desc: "Square-toe mules featuring crossover mesh rhinestone straps.", image: "images/mules.jpg", fallbackImg: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500&q=80" }
+  ];
+
+  const defaultContent = {
+    announcementText: 'FLASH SALE: Enjoy 15% OFF your first order with code: <strong>LEEHART15</strong>',
+    heroTitle: 'Redefine Your Style With Premium <span>Leehart Wear</span>',
+    heroDesc: 'Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.',
+    heroImage: 'images/hero-abaya.jpg'
+  };
+
+  let products = [];
+  let siteContent = {};
+
+  function loadProducts() {
+    try {
+      const stored = localStorage.getItem('leehart_products');
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(defaultProducts));
+  }
+
+  function loadContent() {
+    try {
+      const stored = localStorage.getItem('leehart_content');
+      if (stored) return { ...defaultContent, ...JSON.parse(stored) };
+    } catch (e) {}
+    return { ...defaultContent };
+  }
+
+  function persistProducts() {
+    localStorage.setItem('leehart_products', JSON.stringify(products));
+  }
+
+  function persistContent() {
+    localStorage.setItem('leehart_content', JSON.stringify(siteContent));
+  }
+
+  // ---- Auth ----
+  function attemptLogin() {
+    const val = document.getElementById('adminPassword').value;
+    if (val === ADMIN_PASSWORD) {
+      sessionStorage.setItem('leehart_admin_auth', '1');
+      enterAdmin();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('leehart_admin_auth');
+    document.getElementById('adminShell').classList.remove('open');
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminPassword').value = '';
+  }
+
+  function enterAdmin() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminShell').classList.add('open');
+    document.getElementById('loginError').style.display = 'none';
+    products = loadProducts();
+    siteContent = loadContent();
+    renderDashboard();
+    renderProductTable();
+    renderContentForm();
+  }
+
+  if (sessionStorage.getItem('leehart_admin_auth') === '1') {
+    enterAdmin();
+  }
+
+// ---- Navigation ----
+  function showView(name, btn) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    if (name === 'dashboard') renderDashboard();
+  }
+
+  // ---- Dashboard ----
+  function renderDashboard() {
+    document.getElementById('statTotal').textContent = products.length;
+    document.getElementById('statAbayas').textContent = products.filter(p => p.category === 'abayas').length;
+    document.getElementById('statLuggage').textContent = products.filter(p => p.category === 'luggage').length;
+    document.getElementById('statBags').textContent = products.filter(p => p.category === 'bags').length;
+    document.getElementById('statFootwear').textContent = products.filter(p => p.category === 'footwear').length;
+  }
+
+  // ---- Products table ----
+  function renderProductTable() {
+    const body = document.getElementById('productTableBody');
+    if (!products.length) {
+      body.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--slate-600); padding:20px;">No products yet. Click "Add Product" to create your first listing.</td></tr>';
+      return;
+    }
+    body.innerHTML = products.map(p => `
+      <tr>
+        <td><img src="${p.image}" onerror="this.src='${p.fallbackImg || ''}'; this.onerror=null;" alt=""></td>
+        <td>${p.name}</td>
+        <td style="text-transform:capitalize;">${p.category}</td>
+        <td>${p.price}</td>
+        <td>${p.badge ? `<span class="badge-tag">${p.badge}</span>` : '—'}</td>
+        <td>
+          <div class="row-actions">
+            <button class="btn btn-outline" onclick="openProductForm(${p.id})">Edit</button>
+            <button class="btn btn-danger" onclick="deleteProduct(${p.id})">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function openProductForm(id) {
+    document.getElementById('productFormOverlay').style.display = 'flex';
+    if (id) {
+      const p = products.find(x => x.id === id);
+      document.getElementById('productFormTitle').textContent = 'Edit Product';
+      document.getElementById('pfId').value = p.id;
+      document.getElementById('pfName').value = p.name;
+      document.getElementById('pfCategory').value = p.category;
+      document.getElementById('pfPrice').value = p.price;
+      document.getElementById('pfBadge').value = p.badge || '';
+      document.getElementById('pfRating').value = p.rating || '';
+      document.getElementById('pfImage').value = p.image;
+      document.getElementById('pfDesc').value = p.desc;
+    } else {
+      document.getElementById('productFormTitle').textContent = 'Add Product';
+      document.getElementById('pfId').value = '';
+      document.getElementById('pfName').value = '';
+      document.getElementById('pfCategory').value = 'abayas';
+      document.getElementById('pfPrice').value = '';
+      document.getElementById('pfBadge').value = '';
+      document.getElementById('pfRating').value = '★ 5.0 (0)';
+      document.getElementById('pfImage').value = '';
+      document.getElementById('pfDesc').value = '';
+    }
+  }
+
+  function closeProductForm() {
+    document.getElementById('productFormOverlay').style.display = 'none';
+  }
+
+  function saveProduct() {
+    const name = document.getElementById('pfName').value.trim();
+    const price = document.getElementById('pfPrice').value.trim();
+    if (!name || !price) {
+      showToast('Please enter at least a name and price');
+      return;
+    }
+
+    const idVal = document.getElementById('pfId').value;
+    const data = {
+      name,
+      category: document.getElementById('pfCategory').value,
+      price,
+      badge: document.getElementById('pfBadge').value.trim(),
+      rating: document.getElementById('pfRating').value.trim() || '★ 5.0 (0)',
+      image: document.getElementById('pfImage').value.trim() || 'images/placeholder.jpg',
+      desc: document.getElementById('pfDesc').value.trim(),
+      fallbackImg: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80'
+    };
+
+    if (idVal) {
+      const idx = products.findIndex(p => p.id === Number(idVal));
+      products[idx] = { ...products[idx], ...data };
+    } else {
+      const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
+      products.push({ id: newId, ...data });
+    }
+
+    persistProducts();
+    renderProductTable();
+    renderDashboard();
+    closeProductForm();
+    showToast('Product saved');
+  }
+
+  function deleteProduct(id) {
+    if (!confirm('Remove this product from the site?')) return;
+    products = products.filter(p => p.id !== id);
+    persistProducts();
+    renderProductTable();
+    renderDashboard();
+    showToast('Product removed');
+  }
+
+  // ---- Site content ----
+  function renderContentForm() {
+    document.getElementById('cAnnouncement').value = siteContent.announcementText;
+    document.getElementById('cHeroTitle').value = siteContent.heroTitle;
+    document.getElementById('cHeroDesc').value = siteContent.heroDesc;
+    document.getElementById('cHeroImage').value = siteContent.heroImage;
+  }
+
+  function saveContent() {
+    siteContent = {
+      announcementText: document.getElementById('cAnnouncement').value,
+      heroTitle: document.getElementById('cHeroTitle').value,
+      heroDesc: document.getElementById('cHeroDesc').value,
+      heroImage: document.getElementById('cHeroImage').value
+    };
+    persistContent();
+    showToast('Site content updated');
+  }
+
+  // ---- Toast ----
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+</script>
+</body>
+</html>

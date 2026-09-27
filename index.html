@@ -135,6 +135,7 @@
       background: none;
       border: none;
       cursor: pointer;
+      color: var(--slate-800);
     }
 
     .cart-badge {
@@ -182,6 +183,21 @@
 
     .btn-outline:hover {
       background-color: var(--slate-100);
+    }
+
+    .btn-whatsapp {
+      background-color: #128c39;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #0e7530;
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
     }
 
     /* HERO SECTION */
@@ -361,6 +377,7 @@
       position: relative;
       background-color: var(--slate-100);
       aspect-ratio: 4/5;
+      cursor: pointer;
     }
 
     .product-image-wrap img {
@@ -385,6 +402,7 @@
 
     .product-details {
       padding: 16px;
+      cursor: pointer;
     }
 
     .product-rating {
@@ -415,12 +433,224 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .product-price {
       font-family: var(--font-serif);
       font-size: 1.1rem;
       font-weight: bold;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 16px;
+      color: var(--slate-600);
+      border: 1px dashed var(--slate-200);
+      border-radius: 12px;
+    }
+
+    /* MODALS (product detail, enquiry list, enquiry sent) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.55);
+      z-index: 100;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+      padding: 40px 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 16px;
+      max-width: 720px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--slate-100);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--slate-800);
+      z-index: 3;
+    }
+
+    .modal-close:hover {
+      background: var(--slate-200);
+    }
+
+    /* Product detail modal specific */
+    .pd-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    @media (min-width: 640px) {
+      .pd-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .pd-image {
+      background: var(--slate-100);
+      aspect-ratio: 1/1;
+      border-radius: 16px 16px 0 0;
+    }
+
+    @media (min-width: 640px) {
+      .pd-image {
+        border-radius: 16px 0 0 16px;
+        aspect-ratio: auto;
+        height: 100%;
+      }
+    }
+
+    .pd-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    .pd-info {
+      padding: 28px;
+    }
+
+    .pd-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .pd-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .pd-price {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .pd-desc {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .pd-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pd-note {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--slate-600);
+    }
+
+    /* Enquiry list drawer */
+    .enquiry-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .enquiry-item img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .enquiry-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .enquiry-item-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .enquiry-item-price {
+      font-size: 0.8rem;
+      color: var(--slate-600);
+    }
+
+    .enquiry-remove {
+      background: none;
+      border: none;
+      color: var(--slate-600);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+      flex-shrink: 0;
+    }
+
+    .enquiry-form-field {
+      margin-bottom: 14px;
+    }
+
+    .enquiry-form-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .enquiry-form-field input,
+    .enquiry-form-field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    .enquiry-form-field textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .modal-heading {
+      padding: 24px 24px 0;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+    }
+
+    .modal-body {
+      padding: 20px 24px 24px;
     }
 
     /* FOOTER */
@@ -466,6 +696,27 @@
       text-align: center;
     }
 
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--slate-950);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -476,14 +727,14 @@
 <body>
 
   <!-- ANNOUNCEMENT BAR -->
-  <div class="announcement-bar">
-    <span>FLASH SALE: Enjoy 15% OFF your first order with code: <strong>LEEHART15</strong></span>
+  <div class="announcement-bar" id="announcementBar">
+    <span id="announcementText">FLASH SALE: Enjoy 15% OFF your first order with code: <strong>LEEHART15</strong></span>
   </div>
 
   <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#" class="logo">
+      <a href="#hero" class="logo">
         <div class="logo-badge">LC</div>
         <div>
           <div class="logo-text">LEEHART</div>
@@ -499,7 +750,7 @@
       </div>
 
       <div class="nav-actions">
-        <button class="cart-btn" onclick="addToCart()">
+        <button class="cart-btn" onclick="openEnquiryDrawer()" aria-label="View enquiry list">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="cart-badge" id="cartBadge">0</span>
         </button>
@@ -513,8 +764,8 @@
     <div class="hero-container">
       <div>
         <span class="hero-tag">Luxury Meets Everyday Elegance</span>
-        <h1 class="hero-title">Redefine Your Style With Premium <span>Leehart Wear</span></h1>
-        <p class="hero-desc">Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.</p>
+        <h1 class="hero-title" id="heroTitle">Redefine Your Style With Premium <span>Leehart Wear</span></h1>
+        <p class="hero-desc" id="heroDesc">Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.</p>
         <div class="hero-ctas">
           <a href="#products" class="btn btn-primary">Explore Collection</a>
           <a href="#products" class="btn btn-outline">Browse Inventory</a>
@@ -522,8 +773,7 @@
       </div>
 
       <div class="hero-card">
-        <!-- REPLACE WITH YOUR HERO IMAGE -->
-        <img src="images/hero-abaya.jpg" alt="Luxury White Embellished Abaya" onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80'">
+        <img id="heroImage" src="images/hero-abaya.jpg" alt="Luxury White Embellished Abaya" onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80'">
       </div>
     </div>
   </section>
@@ -554,7 +804,7 @@
         <p style="color: var(--slate-600); font-size: 0.9rem;">Handpicked luxury items ready for immediate order</p>
       </div>
 
-      <div class="tabs">
+      <div class="tabs" id="tabsContainer">
         <button class="tab-btn active" onclick="filterCategory('all', this)">All</button>
         <button class="tab-btn" onclick="filterCategory('abayas', this)">Abayas</button>
         <button class="tab-btn" onclick="filterCategory('luggage', this)">Luggage</button>
@@ -586,21 +836,70 @@
       <div>
         <div class="footer-title">Support</div>
         <ul class="footer-links">
-          <li><a href="#">Track Order</a></li>
+          <li><a href="#" onclick="openEnquiryDrawer(); return false;">Track an Enquiry</a></li>
           <li><a href="#">Shipping Policy</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#" onclick="openEnquiryForm(); return false;">Contact Us</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Leehart Collections. All Rights Reserved.</p>
+      <p>© 2026 Leehart Collections. All Rights Reserved. &nbsp;·&nbsp; <a href="admin.html" style="text-decoration: underline;">Admin</a></p>
     </div>
   </footer>
 
+  <!-- PRODUCT DETAIL MODAL -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box" style="max-width: 780px;">
+      <button class="modal-close" onclick="closeModal('productModal')">✕</button>
+      <div class="pd-grid" id="productModalBody"></div>
+    </div>
+  </div>
+
+    <!-- ENQUIRY LIST DRAWER -->
+  <div class="modal-overlay" id="enquiryDrawer">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close" onclick="closeModal('enquiryDrawer')">✕</button>
+      <h3 class="modal-heading">Your Enquiry List</h3>
+      <div class="modal-body">
+        <div id="enquiryListBody"></div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 14px;" id="proceedEnquiryBtn" onclick="openEnquiryForm()">Send Enquiry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENQUIRY FORM MODAL -->
+  <div class="modal-overlay" id="enquiryFormModal">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close" onclick="closeModal('enquiryFormModal')">✕</button>
+      <h3 class="modal-heading">Send Us Your Enquiry</h3>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--slate-600); margin-bottom: 16px;">Fill in your details and we'll get back to you on WhatsApp about the items you're interested in.</p>
+        <div class="enquiry-form-field">
+          <label for="enqName">Your Name</label>
+          <input type="text" id="enqName" placeholder="e.g. Amaka Johnson">
+        </div>
+        <div class="enquiry-form-field">
+          <label for="enqPhone">Phone Number</label>
+          <input type="text" id="enqPhone" placeholder="e.g. 0803 123 4567">
+        </div>
+        <div class="enquiry-form-field">
+          <label for="enqMessage">Message (optional)</label>
+          <textarea id="enqMessage" placeholder="Any sizing, colour or delivery questions?"></textarea>
+        </div>
+        <button class="btn btn-whatsapp" style="width: 100%;" onclick="sendEnquiry()">Send via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Product Data - Set image paths here
-    const products = [
+    // ---- Store contact number here (used for all WhatsApp enquiry links) ----
+    const STORE_WHATSAPP_NUMBER = "2348000000000"; // TODO: replace with the real business WhatsApp number, international format, no + or leading 0s after country code
+
+    // Default product data - used the first time the site loads, before any admin edits
+    const defaultProducts = [
       {
         id: 1,
         name: "Luxury Embellished Heart Abaya (Pure White)",
@@ -669,19 +968,58 @@
       }
     ];
 
-    let cartCount = 0;
+    const defaultContent = {
+      announcementText: 'FLASH SALE: Enjoy 15% OFF your first order with code: <strong>LEEHART15</strong>',
+      heroTitle: 'Redefine Your Style With Premium <span>Leehart Wear</span>',
+      heroDesc: 'Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.',
+      heroImage: 'images/hero-abaya.jpg'
+    };
 
-    // Render Products
+    // ---- Load products & site content (admin-edited data lives in localStorage) ----
+    function loadProducts() {
+      try {
+        const stored = localStorage.getItem('leehart_products');
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      return defaultProducts;
+    }
+
+    function loadContent() {
+      try {
+        const stored = localStorage.getItem('leehart_content');
+        if (stored) return { ...defaultContent, ...JSON.parse(stored) };
+      } catch (e) {}
+      return defaultContent;
+    }
+
+    const products = loadProducts();
+    const content = loadContent();
+    let enquiryList = [];
+    let currentCategory = 'all';
+
+    function applyContent() {
+      document.getElementById('announcementText').innerHTML = content.announcementText;
+      document.getElementById('heroTitle').innerHTML = content.heroTitle;
+      document.getElementById('heroDesc').textContent = content.heroDesc;
+      const heroImg = document.getElementById('heroImage');
+      heroImg.src = content.heroImage;
+    }
+
+    // ---- Render products ----
     function renderProducts(items) {
       const grid = document.getElementById('productGrid');
+      if (!items.length) {
+        grid.innerHTML = '<div class="empty-state">No items in this collection yet. Check back soon.</div>';
+        return;
+      }
       grid.innerHTML = items.map(p => `
         <div class="product-card">
           <div>
-            <div class="product-image-wrap">
-              <span class="product-badge">${p.badge}</span>
+            <div class="product-image-wrap" onclick="openProductModal(${p.id})">
+              ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
               <img src="${p.image}" alt="${p.name}" onerror="this.src='${p.fallbackImg}'">
             </div>
-            <div class="product-details">
+            <div class="product-details" onclick="openProductModal(${p.id})">
               <div class="product-rating">${p.rating}</div>
               <div class="product-name">${p.name}</div>
               <div class="product-desc">${p.desc}</div>
@@ -689,32 +1027,167 @@
           </div>
           <div class="product-footer">
             <div class="product-price">${p.price}</div>
-            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addToCart()">Add To Cart</button>
+            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addToEnquiry(${p.id})">Enquire</button>
           </div>
         </div>
       `).join('');
     }
 
-    // Filter Logic
     function filterCategory(cat, btn) {
+      currentCategory = cat;
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      renderProducts(cat === 'all' ? products : products.filter(p => p.category === cat));
+    }
 
-      if (cat === 'all') {
-        renderProducts(products);
-      } else {
-        renderProducts(products.filter(p => p.category === cat));
+    // ---- Product detail modal ----
+    function openProductModal(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('productModalBody').innerHTML = `
+        <div class="pd-image">
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='${p.fallbackImg}'">
+        </div>
+        <div class="pd-info">
+          <div class="pd-category">${p.category.toUpperCase()}</div>
+          <div class="pd-name">${p.name}</div>
+          <div class="pd-price">${p.price}</div>
+          <div class="pd-desc">${p.desc}</div>
+          <div class="pd-actions">
+            <button class="btn btn-primary" onclick="addToEnquiry(${p.id}); closeModal('productModal');">Add to Enquiry List</button>
+            <button class="btn btn-whatsapp" onclick="enquireSingleItem(${p.id})">Enquire on WhatsApp Now</button>
+          </div>
+          <p class="pd-note">Delivery timelines and exact sizing are confirmed once we receive your enquiry.</p>
+        </div>
+      `;
+      openModal('productModal');
+    }
+      // ---- Enquiry list (cart-like) ----
+    function addToEnquiry(id) {
+      if (enquiryList.includes(id)) {
+        showToast('Already in your enquiry list');
+        return;
       }
+      enquiryList.push(id);
+      updateCartBadge();
+      showToast('Added to your enquiry list');
     }
 
-    // Cart Counter
-    function addToCart() {
-      cartCount++;
-      document.getElementById('cartBadge').innerText = cartCount;
+    function removeFromEnquiry(id) {
+      enquiryList = enquiryList.filter(x => x !== id);
+      updateCartBadge();
+      renderEnquiryDrawer();
     }
 
-    // Initial Load
+    function updateCartBadge() {
+      document.getElementById('cartBadge').innerText = enquiryList.length;
+    }
+
+    function openEnquiryDrawer() {
+      renderEnquiryDrawer();
+      openModal('enquiryDrawer');
+    }
+
+    function renderEnquiryDrawer() {
+      const body = document.getElementById('enquiryListBody');
+      const btn = document.getElementById('proceedEnquiryBtn');
+      if (!enquiryList.length) {
+        body.innerHTML = '<div class="empty-state">Your enquiry list is empty. Tap "Enquire" on any item to add it here.</div>';
+        btn.disabled = true;
+        return;
+      }
+      btn.disabled = false;
+      body.innerHTML = enquiryList.map(id => {
+        const p = products.find(x => x.id === id);
+        if (!p) return '';
+        return `
+          <div class="enquiry-item">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='${p.fallbackImg}'">
+            <div class="enquiry-item-info">
+              <div class="enquiry-item-name">${p.name}</div>
+              <div class="enquiry-item-price">${p.price}</div>
+            </div>
+            <button class="enquiry-remove" onclick="removeFromEnquiry(${p.id})">Remove</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ---- Enquiry form -> WhatsApp ----
+    let singleItemEnquiryId = null;
+
+    function enquireSingleItem(id) {
+      singleItemEnquiryId = id;
+      closeModal('productModal');
+      openEnquiryForm();
+    }
+
+    function openEnquiryForm() {
+      closeModal('enquiryDrawer');
+      openModal('enquiryFormModal');
+    }
+
+    function sendEnquiry() {
+      const name = document.getElementById('enqName').value.trim();
+      const phone = document.getElementById('enqPhone').value.trim();
+      const message = document.getElementById('enqMessage').value.trim();
+
+      if (!name || !phone) {
+        showToast('Please enter your name and phone number');
+        return;
+      }
+
+      const items = singleItemEnquiryId
+        ? [products.find(x => x.id === singleItemEnquiryId)].filter(Boolean)
+        : enquiryList.map(id => products.find(x => x.id === id)).filter(Boolean);
+
+      if (!items.length) {
+        showToast('Add at least one item before sending an enquiry');
+        return;
+      }
+
+      let text = `Hello Leehart Collections, my name is ${name} (${phone}).\n\nI'd like to enquire about:\n`;
+      items.forEach(p => {
+        text += `- ${p.name} (${p.price})\n`;
+      });
+      if (message) text += `\nMessage: ${message}`;
+
+      const url = `https://wa.me/${STORE_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+
+      closeModal('enquiryFormModal');
+      showToast('Opening WhatsApp…');
+      singleItemEnquiryId = null;
+    }
+
+    // ---- Modal helpers ----
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal(overlay.id);
+      });
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    // ---- Initial load ----
+    applyContent();
     renderProducts(products);
+    updateCartBadge();
   </script>
 </body>
 </html>
