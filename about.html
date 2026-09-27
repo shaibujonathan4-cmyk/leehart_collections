@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leehart Collections | Luxury Modest Wear & Accessories</title>
+  <title>About Us | Leehart Collections</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,21 +53,22 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section id="hero" class="hero">
-    <div class="hero-container">
-      <div>
-        <span class="hero-tag">Luxury Meets Everyday Elegance</span>
-        <h1 class="hero-title" id="heroTitle">Redefine Your Style With Premium <span>Leehart Wear</span></h1>
-        <p class="hero-desc" id="heroDesc">Explore our curated selection of embellished silk abayas, luxury luggage sets, handcrafted designer handbags, and crystal-studded footwear.</p>
-        <div class="hero-ctas">
-          <a href="collections.html" class="btn btn-primary">Explore Collection</a>
-          <a href="collections.html" class="btn btn-outline">Browse Inventory</a>
-        </div>
+  <!-- ABOUT US -->
+  <section style="background: white;">
+    <div class="section-container about-grid">
+      <div class="about-image">
+        <img src="images/about-atelier.jpg" alt="Leehart Collections workspace" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=700&q=80'">
       </div>
-
-      <div class="hero-card">
-        <img id="heroImage" src="images/hero-abaya.jpg" alt="Luxury White Embellished Abaya" onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80'">
+      <div class="about-copy">
+        <span class="hero-tag">Our Story</span>
+        <h1 class="section-title-serif">Crafted For Women Who Dress With Intention</h1>
+        <p>Leehart Collections started with a simple frustration: it was hard to find modest wear that felt genuinely luxurious, not just modest as an afterthought. We set out to change that — sourcing embellished silk-blend abayas, structured leather bags, spinner luggage sets, and crystal-accented footwear that hold up to a closer look.</p>
+        <p>Every piece is inspected before it ships, and every order is handled personally — when you reach out, you're talking to our team directly, not a call centre.</p>
+        <div class="about-stats">
+          <div><strong>500+</strong><span>Orders Delivered</span></div>
+          <div><strong>4.9★</strong><span>Average Rating</span></div>
+          <div><strong>7-Day</strong><span>Exchange Window</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -90,19 +91,10 @@
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS (preview only - full catalogue lives on Collections) -->
-  <section class="products-section">
-    <div class="section-header">
-      <div class="section-title">
-        <h2>Our Featured Collections</h2>
-        <p style="color: var(--slate-600); font-size: 0.9rem;">A few favourites — see everything on the Collections page</p>
-      </div>
-      <a href="collections.html" class="btn btn-outline">View All Collections</a>
-    </div>
-
-    <div class="product-grid" id="featuredGrid">
-      <!-- FEATURED PRODUCTS INJECTED VIA JAVASCRIPT -->
-    </div>
+  <section class="section-container" style="text-align: center;">
+    <h2 class="section-title-serif">Ready To Explore?</h2>
+    <p style="color: var(--slate-600); font-size: 0.9rem; margin-bottom: 22px;">See everything currently in stock, from abayas to footwear.</p>
+    <a href="collections.html" class="btn btn-primary">Browse Collections</a>
   </section>
 
   <!-- FOOTER -->
@@ -134,14 +126,6 @@
       <p>© 2026 Leehart Collections. All Rights Reserved. &nbsp;·&nbsp; <a href="admin.html" style="text-decoration: underline;">Admin</a></p>
     </div>
   </footer>
-
-  <!-- PRODUCT DETAIL MODAL -->
-  <div class="modal-overlay" id="productModal">
-    <div class="modal-box" style="max-width: 780px;">
-      <button class="modal-close" onclick="closeModal('productModal')">✕</button>
-      <div class="pd-grid" id="productModalBody"></div>
-    </div>
-  </div>
 
   <!-- ENQUIRY LIST DRAWER -->
   <div class="modal-overlay" id="enquiryDrawer">
@@ -182,8 +166,5 @@
   <div class="toast" id="toast"></div>
 
   <script src="common.js"></script>
-  <script>
-    renderProducts(products.slice(0, 3), 'featuredGrid');
-  </script>
 </body>
 </html>
