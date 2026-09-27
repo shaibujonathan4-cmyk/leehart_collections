@@ -653,6 +653,151 @@
       padding: 20px 24px 24px;
     }
 
+    /* CONTENT SECTIONS (About, FAQ, Contact) */
+    .section-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 70px 16px;
+    }
+
+    .section-title-serif {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .about-grid {
+        grid-template-columns: 5fr 7fr;
+      }
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 16px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .about-copy p {
+      color: var(--slate-600);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .about-stats div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-stats strong {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+    }
+
+    .about-stats span {
+      font-size: 0.75rem;
+      color: var(--slate-600);
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 760px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--slate-200);
+      padding: 18px 0;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.3rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .faq-item[open] summary::after {
+      content: "\2212";
+    }
+
+    .faq-item p {
+      margin-top: 12px;
+      color: var(--slate-600);
+      font-size: 0.85rem;
+      line-height: 1.65;
+      max-width: 640px;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    @media (min-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 5fr 7fr;
+      }
+    }
+
+    .contact-detail-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .contact-detail-item strong {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 2px;
+    }
+
+    .contact-detail-item span {
+      font-size: 0.85rem;
+      color: var(--slate-600);
+    }
+
+    .contact-form-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
     /* FOOTER */
     footer {
       background-color: var(--slate-950);
@@ -745,8 +890,9 @@
       <div class="nav-links">
         <a href="#hero">Home</a>
         <a href="#products">Collections</a>
-        <a href="#products">Best Sellers</a>
-        <a href="#reviews">Reviews</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </div>
 
       <div class="nav-actions">
@@ -778,7 +924,7 @@
     </div>
   </section>
 
-  <!-- TRUST BADGES -->
+<!-- TRUST BADGES -->
   <section class="trust-section">
     <div class="trust-grid">
       <div class="trust-item">
@@ -818,6 +964,108 @@
     </div>
   </section>
 
+  <!-- ABOUT US -->
+  <section id="about" style="background: white; border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);">
+    <div class="section-container about-grid">
+      <div class="about-image">
+        <img src="images/about-atelier.jpg" alt="Leehart Collections workspace" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=700&q=80'">
+      </div>
+      <div class="about-copy">
+        <span class="hero-tag">Our Story</span>
+        <h2 class="section-title-serif">Crafted For Women Who Dress With Intention</h2>
+        <p>Leehart Collections started with a simple frustration: it was hard to find modest wear that felt genuinely luxurious, not just modest as an afterthought. We set out to change that — sourcing embellished silk-blend abayas, structured leather bags, spinner luggage sets, and crystal-accented footwear that hold up to a closer look.</p>
+        <p>Every piece is inspected before it ships, and every order is handled personally — when you reach out, you're talking to our team directly, not a call centre.</p>
+        <div class="about-stats">
+          <div><strong>500+</strong><span>Orders Delivered</span></div>
+          <div><strong>4.9★</strong><span>Average Rating</span></div>
+          <div><strong>7-Day</strong><span>Exchange Window</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background: var(--slate-50);">
+    <div class="section-container">
+      <div class="section-title" style="margin-bottom: 28px;">
+        <h2>Frequently Asked Questions</h2>
+        <p style="color: var(--slate-600); font-size: 0.9rem;">Everything you need to know before you order</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>How do I place an order?</summary>
+          <p>Browse the collections above, tap "Enquire" on anything you like, then send your enquiry — it opens a pre-filled WhatsApp message to our team so we can confirm size, colour and delivery before payment.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What payment methods do you accept?</summary>
+          <p>We currently confirm orders and take payment directly over WhatsApp once your details are finalised. We'll share our bank transfer details or payment link at that stage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How long does delivery take?</summary>
+          <p>Most orders are tracked and delivered within a few business days of confirmation. Exact timing depends on your location, and we'll confirm it with you directly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I exchange or return an item?</summary>
+          <p>Yes — we offer a 7-day, hassle-free exchange window from the day your order arrives, as long as the item is unused and in its original packaging.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do you offer custom sizing?</summary>
+          <p>For abayas, let us know your preferred length and fit when you enquire — we're happy to advise or adjust where possible.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT US -->
+  <section id="contact" style="background: white; border-top: 1px solid var(--slate-200);">
+    <div class="section-container contact-grid">
+      <div>
+        <span class="hero-tag">Get In Touch</span>
+        <h2 class="section-title-serif">We'd Love To Hear From You</h2>
+        <p style="color: var(--slate-600); font-size: 0.9rem; margin-bottom: 24px; max-width: 460px;">Questions about an item, an existing order, or just want advice on sizing? Reach out and we'll respond as quickly as we can.</p>
+
+        <div class="contact-detail-item">
+          <div>
+            <strong>WhatsApp / Phone</strong>
+            <span>Fastest way to reach us — use the form or tap Enquire on any item</span>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div>
+            <strong>Response Time</strong>
+            <span>We usually reply within a few hours during business days</span>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div>
+            <strong>Order Support</strong>
+            <span>Already ordered? Include your name and phone number so we can find your order quickly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <div class="enquiry-form-field">
+          <label for="contactName">Your Name</label>
+          <input type="text" id="contactName" placeholder="e.g. Amaka Johnson">
+        </div>
+        <div class="enquiry-form-field">
+          <label for="contactPhone">Phone Number</label>
+          <input type="text" id="contactPhone" placeholder="e.g. 0803 123 4567">
+        </div>
+        <div class="enquiry-form-field">
+          <label for="contactEmail">Email (optional)</label>
+          <input type="text" id="contactEmail" placeholder="e.g. amaka@email.com">
+        </div>
+        <div class="enquiry-form-field">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" placeholder="How can we help?"></textarea>
+        </div>
+        <button class="btn btn-whatsapp" style="width: 100%;" onclick="submitContactForm()">Send via WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
@@ -830,15 +1078,16 @@
         <ul class="footer-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#products">Collections</a></li>
-          <li><a href="#products">New Arrivals</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-title">Support</div>
         <ul class="footer-links">
           <li><a href="#" onclick="openEnquiryDrawer(); return false;">Track an Enquiry</a></li>
-          <li><a href="#">Shipping Policy</a></li>
-          <li><a href="#" onclick="openEnquiryForm(); return false;">Contact Us</a></li>
+          <li><a href="#faq">Shipping Policy</a></li>
+          <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
     </div>
@@ -855,7 +1104,7 @@
     </div>
   </div>
 
-    <!-- ENQUIRY LIST DRAWER -->
+  <!-- ENQUIRY LIST DRAWER -->
   <div class="modal-overlay" id="enquiryDrawer">
     <div class="modal-box" style="max-width: 480px;">
       <button class="modal-close" onclick="closeModal('enquiryDrawer')">✕</button>
@@ -890,7 +1139,6 @@
       </div>
     </div>
   </div>
-
   <div class="toast" id="toast"></div>
 
   <!-- JAVASCRIPT LOGIC -->
@@ -1062,7 +1310,8 @@
       `;
       openModal('productModal');
     }
-      // ---- Enquiry list (cart-like) ----
+
+    // ---- Enquiry list (cart-like) ----
     function addToEnquiry(id) {
       if (enquiryList.includes(id)) {
         showToast('Already in your enquiry list');
@@ -1158,6 +1407,32 @@
       closeModal('enquiryFormModal');
       showToast('Opening WhatsApp…');
       singleItemEnquiryId = null;
+    }
+
+    // ---- Contact form (general enquiries, not tied to a specific product) ----
+    function submitContactForm() {
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+
+      if (!name || !phone) {
+        showToast('Please enter your name and phone number');
+        return;
+      }
+
+      let text = `Hello Leehart Collections, my name is ${name} (${phone}).`;
+      if (email) text += `\nEmail: ${email}`;
+      text += `\n\n${message || "I'd like to know more about your products."}`;
+
+      const url = `https://wa.me/${STORE_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+
+      document.getElementById('contactName').value = '';
+      document.getElementById('contactPhone').value = '';
+      document.getElementById('contactEmail').value = '';
+      document.getElementById('contactMessage').value = '';
+      showToast('Opening WhatsApp…');
     }
 
     // ---- Modal helpers ----
